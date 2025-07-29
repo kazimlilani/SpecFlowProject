@@ -1,36 +1,44 @@
-# API Automation Testing Framework
+# Automated Testing Framework
 
-This repository contains an automated testing framework for API testing using SpecFlow, RestSharp/HttpClient, and NUnit. It covers CRUD operations against the [Reqres.in](https://reqres.in) test API.
+This repository contains a comprehensive testing framework covering both UI automation (TODO web application) and API testing (Reqres.in) using SpecFlow, Selenium, RestSharp, and NUnit.
 
 ## Features
 
-- **Complete CRUD Operations**:
-  - Create users (POST)
-  - Read users (GET)
-  - Update users (PUT)
-  - Delete users (DELETE)
-  
-- **Testing Types**:
-  - Positive test cases
-  - Negative test cases
-  - Data validation
-  - Status code verification
+### UI Testing (TODO Web Application)
+- **Login Functionality**
+  - Successful login with valid credentials
+  - Failed login with error validation
+- **Task Management**
+  - Create new tasks with details
+  - Delete existing tasks
+  - Form validation
 
-- **Technology Stack**:
-  - SpecFlow for BDD
-  - RestSharp/HttpClient for API calls
-  - NUnit for assertions
-  - Newtonsoft.Json for JSON parsing
+### API Testing (Reqres.in)
+- **CRUD Operations**
+  - GET: Fetch list of users
+  - POST: Create new users
+  - PUT: Update existing users
+  - DELETE: Remove users
+- **Response Validation**
+  - Status codes
+  - Response schemas
+  - Data integrity
+
+## Technology Stack
+- **Framework**: SpecFlow (BDD)
+- **UI Automation**: Selenium WebDriver
+- **API Testing**: RestSharp
+- **Assertions**: NUnit
+- **Reporting**: Built-in SpecFlow reports
+- **CI/CD Ready**: GitHub Actions compatible
 
 ## Prerequisites
-
-- [.NET 6.0 SDK](https://dotnet.microsoft.com/download) or later
-- Visual Studio 2022 (with SpecFlow extension) or JetBrains Rider
-- Git
+- [.NET 6.0 SDK](https://dotnet.microsoft.com/download)
+- Chrome/Firefox browser (for UI tests)
+- Visual Studio 2022 with SpecFlow extension (recommended)
 
 ## Installation
-
 1. Clone the repository:
    ```bash
    git clone https://github.com/kazimlilani/SpecFlowProject
-   cd api-automation-framework
+   cd automation-framework
