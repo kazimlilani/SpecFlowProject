@@ -5,15 +5,15 @@ visit todo website and login
 @LoginFailed
 Scenario: 1 Navigate on todo list site
     Given I am on the TODO Website
-    When I enter my email "kazimlilani@outlook.com" and click submit
+    When I enter my email "kazim@outlook.com" and click submit
     And I enter my password "wrongPassword" and submit
     Then I should see error message "Failed to login"
 
 @LoginPassed
 Scenario: 2 Navigate on todo list site
     Given I am on the TODO Website
-    When I enter my email "kazimlilani@outlook.com" and click submit
-    And I enter my password "king123" and submit
+    When I enter my email "kazim@outlook.com" and click submit
+    And I enter my password "kazim" and submit
 
 @TaskAdd
 Scenario: 3 Create a new task with details
