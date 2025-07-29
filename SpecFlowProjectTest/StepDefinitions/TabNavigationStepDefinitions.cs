@@ -6,12 +6,15 @@ using SpecFlowProjectTest.Pages.DHCW;
 using SpecFlowProjectTest.Support;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium; // Already present
+using OpenQA.Selenium.Support.Extensions; 
 
 namespace SpecFlowProjectTest.StepDefinitions
 {
@@ -38,6 +41,16 @@ namespace SpecFlowProjectTest.StepDefinitions
             var url = $"{PageUrl.HOME_PAGE}";
             _dhcwHomePage = _browser.NavigateTo<DHCW_HomePage>(url);
         }
+
+        [When(@"I enter my email ""(.*)"" using locator ""(.*)""")]
+        public void WhenIEnterMyEmailWithLocator(string email, string locatorName)
+        {
+            var emailInput = _browser.DriverWaitInstance().Until(
+                ExpectedConditions.ElementIsVisible(LocatorFactory.GetLocator(locatorName))
+            );
+            emailInput.SendKeys(email);
+        }
+
 
         [When(@"I enter my email ""(.*)"" and click submit")]
         public void WhenIEnterMyEmailAndClickSubmit(string email)
@@ -360,6 +373,42 @@ namespace SpecFlowProjectTest.StepDefinitions
         public void ThenTheResponseShouldBeEmpty()
         {
             Assert.IsEmpty(_response.Content);
+        }
+    }
+
+    [Binding]
+    public class ScreenshotHooks
+    {
+        private readonly ScenarioContext _scenarioContext;
+        private readonly Browser _browser;
+
+        public ScreenshotHooks(ScenarioContext scenarioContext, Browser browser)
+        {
+            _scenarioContext = scenarioContext;
+            _browser = browser;
+        }
+
+        [AfterScenario]
+        public void TakeScreenshotOnFailure()
+        {
+            if (_scenarioContext.TestError != null)
+            {
+                try
+                {
+                    var screenshotsDir = Path.Combine(Directory.GetCurrentDirectory(), "Screenshots");
+                    Directory.CreateDirectory(screenshotsDir);
+
+                    var fileName = $"{_scenarioContext.ScenarioInfo.Title}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+                    var filePath = Path.Combine(screenshotsDir, fileName);
+
+                    var screenshot = ((ITakesScreenshot)_browser.DriverInstance()).GetScreenshot();
+                    screenshot.SaveAsFile(filePath);
+                }
+                catch (Exception ex)
+                {
+                    // Optionally log screenshot failure
+                }
+            }
         }
     }
 }

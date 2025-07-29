@@ -106,13 +106,13 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.Given("I am on the TODO Website", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
-    testRunner.When("I enter my email \"kazimlilani@outlook.com\" and click submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("I enter my email \"user@email.com\" using locator \"EmailInput\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
     testRunner.And("I enter my password \"wrongPassword\" and submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
-    testRunner.Then("I should see error message \"Failed to login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("I should see error message \"Failed to loginz\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -32,10 +32,17 @@
 
   <ItemGroup>
     <Folder Include="Drivers\" />
+    <Folder Include="OpenQA\Selenium\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ElementFactory.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

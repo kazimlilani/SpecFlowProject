@@ -122,7 +122,7 @@ namespace SpecFlowProjectTest.Support
         }
         public void Dispose()
         {
-            _driver?.Quit();
+            // _driver?.Quit(); // Remove or comment this line to keep browser open
         }
     }
 }

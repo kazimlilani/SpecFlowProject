@@ -1,0 +1,17 @@
+<Elements>
+  <Element name="EmailInput" type="CssSelector">input[type='email'][placeholder='Email']</Element>
+  <Element name="PasswordInput" type="CssSelector">input[type='password'][placeholder='Password']</Element>
+  <Element name="LoginButton" type="XPath">//button[text()='Login']</Element>
+  <Element name="TitleField" type="CssSelector">input.title-input[type='text']</Element>
+  <Element name="DescriptionField" type="CssSelector">textarea[type='text'][placeholder*='Description']</Element>
+  <Element name="PriorityDropdown" type="CssSelector">div.MuiSelect-root[role='button']</Element>
+  <Element name="PriorityOption" type="XPath">//li[contains(@class,'MuiMenuItem-root') and normalize-space()='{0}']</Element>
+  <Element name="NewButton" type="XPath">//button[contains(@class,'btnNew') and normalize-space()='{0}']</Element>
+  <Element name="TaskItemTitle" type="XPath">//div[contains(@class,'title')]//h2[normalize-space()='{0}']</Element>
+  <Element name="TaskItem" type="XPath">//div[contains(@class,'title')]//h2[normalize-space()='{0}']/ancestor::div[contains(@class,'task-item')]</Element>
+  <Element name="DeleteButton" type="CssSelector">svg.delete, [title='delete']</Element>
+  <Element name="ConfirmDeleteButton" type="XPath">//button[contains(text(),'Confirm') or contains(text(),'Delete')]</Element>
+  <Element name="SuccessMessage" type="XPath">//div[contains(@class,'alert-success') and contains(text(),'Task created')]</Element>
+  <Element name="ErrorMessage" type="CssSelector">p.error</Element>
+  <Element name="HomePageIndicator" type="ClassName">home-page-indicator</Element>
+</Elements>
