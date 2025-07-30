@@ -5,6 +5,10 @@ using SpecFlowProjectTest.Pages;
 using NUnit.Framework;
 using SpecFlowProjectTest.Pages.DHCW;
 using SpecFlowProjectTest.Tests;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
+using OpenQA.Selenium;
+using TechTalk.SpecFlow;
 
 namespace SpecFlowProjectTest.Hooks
 {
@@ -59,6 +63,36 @@ namespace SpecFlowProjectTest.Hooks
             });
         }
 
+    }
+
+    [Binding]
+    public class ExtentHooks
+    {
+        [BeforeScenario]
+        public void BeforeScenario(ScenarioContext scenarioContext)
+        {
+            ExtentReportHelper.Test = ExtentReportHelper.Extent.CreateTest(scenarioContext.ScenarioInfo.Title);
+        }
+
+        [AfterStep]
+        public void AfterStep(ScenarioContext scenarioContext)
+        {
+            var stepInfo = scenarioContext.StepContext.StepInfo;
+            if (scenarioContext.TestError == null)
+            {
+                ExtentReportHelper.Test.Pass(stepInfo.Text);
+            }
+            else
+            {
+                ExtentReportHelper.Test.Fail($"{stepInfo.Text} - {scenarioContext.TestError.Message}");
+            }
+        }
+
+        [AfterTestRun]
+        public static void AfterTestRun()
+        {
+            ExtentReportHelper.FlushReport();
+        }
     }
 }
 

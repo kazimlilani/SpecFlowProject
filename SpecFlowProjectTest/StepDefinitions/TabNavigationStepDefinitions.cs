@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 using RestSharp;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
-using OpenQA.Selenium; // Already present
-using OpenQA.Selenium.Support.Extensions; 
 
 namespace SpecFlowProjectTest.StepDefinitions
 {
@@ -49,6 +47,8 @@ namespace SpecFlowProjectTest.StepDefinitions
                 ExpectedConditions.ElementIsVisible(LocatorFactory.GetLocator(locatorName))
             );
             emailInput.SendKeys(email);
+          //  ExtentReportHelper.Test.Pass("Step description or success message");
+
         }
 
 
