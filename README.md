@@ -29,7 +29,8 @@ This repository contains a comprehensive testing framework covering both UI auto
 - **UI Automation**: Selenium WebDriver
 - **API Testing**: RestSharp
 - **Assertions**: NUnit
-- **Reporting**: Built-in SpecFlow reports
+- **Reporting**: Extent Reporting**
+- **Logging**: Serilog**
 - **CI/CD Ready**: GitHub Actions compatible
 
 ## Prerequisites

@@ -100,6 +100,28 @@ namespace SpecFlowProjectTest.Hooks
             {
                 Log.Error("Step failed: {Step} - {Error}", stepInfo.Text, scenarioContext.TestError.Message);
                 ExtentReportHelper.Test.Fail($"{stepInfo.Text} - {scenarioContext.TestError.Message}");
+
+                // Take screenshot and attach to ExtentReport
+                try
+                {
+                    // Get browser from DI container or static reference
+                    var browser = scenarioContext.ScenarioContainer.Resolve<Browser>();
+                    var screenshot = ((ITakesScreenshot)browser.DriverInstance()).GetScreenshot();
+
+                    var screenshotsDir = Path.Combine(Directory.GetCurrentDirectory(), "Screenshots");
+                    Directory.CreateDirectory(screenshotsDir);
+
+                    var fileName = $"{scenarioContext.ScenarioInfo.Title}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+                    var filePath = Path.Combine(screenshotsDir, fileName);
+
+                    screenshot.SaveAsFile(filePath);
+
+                    ExtentReportHelper.Test.AddScreenCaptureFromPath(filePath);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Failed to capture screenshot: {Error}", ex.Message);
+                }
             }
         }
 
