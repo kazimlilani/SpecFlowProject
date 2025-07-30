@@ -112,7 +112,7 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.And("I enter my password \"wrongPassword\" and submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
-    testRunner.Then("I should see error message \"Failed to loginz\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("I should see error message \"Failed to login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

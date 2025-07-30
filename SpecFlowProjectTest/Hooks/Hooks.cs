@@ -9,6 +9,7 @@ using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
+using Serilog;
 
 namespace SpecFlowProjectTest.Hooks
 {
@@ -26,6 +27,15 @@ namespace SpecFlowProjectTest.Hooks
         [BeforeTestRun]
         public static void BeforeFeature()
         {
+            // Serilog initialization
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File("logs\\automation.log", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            Log.Information("Test run started.");
+
             var config = ConfigData.Get();
             CheckConfigVariables(config);
 
@@ -51,7 +61,9 @@ namespace SpecFlowProjectTest.Hooks
         [AfterTestRun]
         public static void Cleanup()
         {
+            Log.Information("Test run finished.");
             browser?.Dispose();
+            Log.CloseAndFlush();
         }
 
         private static void CheckConfigVariables(ConfigDataModel config)
@@ -71,6 +83,7 @@ namespace SpecFlowProjectTest.Hooks
         [BeforeScenario]
         public void BeforeScenario(ScenarioContext scenarioContext)
         {
+            Log.Information("Starting scenario: {Scenario}", scenarioContext.ScenarioInfo.Title);
             ExtentReportHelper.Test = ExtentReportHelper.Extent.CreateTest(scenarioContext.ScenarioInfo.Title);
         }
 
@@ -80,10 +93,12 @@ namespace SpecFlowProjectTest.Hooks
             var stepInfo = scenarioContext.StepContext.StepInfo;
             if (scenarioContext.TestError == null)
             {
+                Log.Information("Step passed: {Step}", stepInfo.Text);
                 ExtentReportHelper.Test.Pass(stepInfo.Text);
             }
             else
             {
+                Log.Error("Step failed: {Step} - {Error}", stepInfo.Text, scenarioContext.TestError.Message);
                 ExtentReportHelper.Test.Fail($"{stepInfo.Text} - {scenarioContext.TestError.Message}");
             }
         }

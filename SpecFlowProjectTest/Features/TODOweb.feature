@@ -7,7 +7,7 @@ Scenario: 1 Navigate on todo list site
     Given I am on the TODO Website
     When I enter my email "user@email.com" using locator "EmailInput"
     And I enter my password "wrongPassword" and submit
-    Then I should see error message "Failed to loginz"
+    Then I should see error message "Failed to login"
 
 @LoginPassed
 Scenario: 2 Navigate on todo list site
