@@ -210,7 +210,7 @@ namespace SpecFlowProjectTest.StepDefinitions
         {
             var errorElement = _browser.DriverWaitInstance().Until(
                 ExpectedConditions.ElementIsVisible(
-                    By.CssSelector("p.errorz"))
+                    By.CssSelector("p.error"))
             );
 
             Assert.Equals(expectedErrorMessage, errorElement.Text.Trim());

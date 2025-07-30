@@ -8,10 +8,17 @@ namespace SpecFlowProjectTest.Support
     {
         public static ExtentReports Extent;
         public static ExtentTest Test;
+        private static string _reportPath;
 
         static ExtentReportHelper()
         {
-            var sparkReporter = new ExtentSparkReporter(@"D:\Automation\csharp\Demonstrating-DHCW-UI-Test-Approach-master\ExtentReport.html");
+            var reportsDir = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Reports");
+            System.IO.Directory.CreateDirectory(reportsDir);
+
+            var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            _reportPath = System.IO.Path.Combine(reportsDir, $"ExtentReport_{timestamp}.html");
+
+            var sparkReporter = new ExtentSparkReporter(_reportPath);
             Extent = new ExtentReports();
             Extent.AttachReporter(sparkReporter);
         }
@@ -20,5 +27,7 @@ namespace SpecFlowProjectTest.Support
         {
             Extent.Flush();
         }
+
+        public static string ReportPath => _reportPath;
     }
 }
